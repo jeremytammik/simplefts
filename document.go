@@ -9,7 +9,7 @@ import (
 	"os"
   "path/filepath"
   //"golang.org/x/net/html"
-  //"github.com/PuerkitoBio/goquery"
+  "github.com/PuerkitoBio/goquery"
 )
 
 // document represents a Wikipedia abstract dump document.

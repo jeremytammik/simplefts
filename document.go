@@ -6,19 +6,10 @@ import (
   "log"
   "strings"
   "strconv"
-  //"io/ioutil"
 	"os"
   "path/filepath"
   "github.com/PuerkitoBio/goquery"
 )
-
-// document represents a Wikipedia abstract dump document.
-//type document struct {
-//	Title string `xml:"title"`
-//	URL   string `xml:"url"`
-//	Text  string `xml:"abstract"`
-//	ID    int
-//}
 
 // document represents a tbc blog post
 type document struct {

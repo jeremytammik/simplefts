@@ -67,11 +67,11 @@ func loadDocuments(path string) ([]document, error) {
     if err != nil {
       log.Fatal(err)
     }
-    defer func() {
-      if err = f.Close(); err != nil {
-        log.Fatal(err)
-      }
-    }()
+    //defer func() {
+    //  if err = f.Close(); err != nil {
+    //    log.Fatal(err)
+    //  }
+    //}()
 
     r := bufio.NewReader(f)    
     doc, _ := goquery.NewDocumentFromReader(r)

@@ -72,21 +72,22 @@ func loadDocuments(path string) ([]document, error) {
 
     fp := path + "/" + fn
 
-    buf, err := os.Open(fp)
+    f, err := os.Open(fp)
     if err != nil {
       log.Fatal(err)
     }
     defer func() {
-      if err = buf.Close(); err != nil {
+      if err = f.Close(); err != nil {
         log.Fatal(err)
       }
     }()
 
-    r := bufio.NewReader(buf)    
+    r := bufio.NewReader(f)    
     doc, _ := goquery.NewDocumentFromReader(r)
     id, _ := strconv.Atoi(fn[0:4])
     title := doc.Find("h3").First().Text()
     docs = append(docs, document{title,doc.Text(),id})
+    f.Close()
   }
   for i := range docs {
     fmt.Println(docs[i].ID,docs[i].Title)

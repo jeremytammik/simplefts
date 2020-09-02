@@ -50,7 +50,7 @@ func visit(filenames *[]string) filepath.WalkFunc {
     i += 1
     ext := fn[i:i+3]
     if ext != "htm" {
-      fmt.Println(ext)
+      //fmt.Println(ext)
       return nil
     }
     *filenames = append(*filenames, fn)
@@ -59,23 +59,19 @@ func visit(filenames *[]string) filepath.WalkFunc {
 }
 
 func loadDocuments(path string) ([]document, error) {
-  
   var filenames []string
-
   err := filepath.Walk(path, visit(&filenames))
   if err != nil {
     panic(err)
   }
-
-	dump := struct {
-		Documents []document
-	}{}
-
+  n := len(filenames)
+  fmt.Println(n, "files")
+  docs := make([]document,n)
+  
   for _, fn := range filenames {
+
     fp := path + "/" + fn
-    //s, err := ioutil.ReadFile(fp)
-    //p := strings.NewReader(s)
-    
+
     buf, err := os.Open(fp)
     if err != nil {
       log.Fatal(err)
@@ -88,17 +84,12 @@ func loadDocuments(path string) ([]document, error) {
 
     r := bufio.NewReader(buf)    
     doc, _ := goquery.NewDocumentFromReader(r)
-    id, _ := strconv.Atoi(fn[0:5])
+    id, _ := strconv.Atoi(fn[0:4])
     title := doc.Find("h3").First().Text()
-    text := doc.Text()
-    fmt.Println(id,title)
+    docs = append(docs, document{title,doc.Text(),id})
   }
-  
-  docs := dump.Documents
-	
-  //for i := range docs {
-	//	docs[i].ID = i
-	//}
-
+  for i := range docs {
+    fmt.Println(docs[i].ID,docs[i].Title)
+	}
 	return docs, nil
 }

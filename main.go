@@ -8,8 +8,8 @@ import (
 
 func main() {
 	var dumpPath, query string
-	flag.StringVar(&dumpPath, "p", "enwiki-latest-abstract1.xml.gz", "wiki abstract dump path")
-	flag.StringVar(&query, "q", "Small wild cat", "search query")
+	flag.StringVar(&dumpPath, "p", "/a/doc/revit/tbc/git/a", "The Building Coder blog post source path")
+	flag.StringVar(&query, "q", "pipe segment create", "search query")
 	flag.Parse()
 
 	log.Println("Starting tbcfts")

@@ -4,12 +4,16 @@ import (
   "fmt"
   "log"
   "strings"
+  "strconv"
+  "io/ioutil"
 	//"compress/gzip"
 	//"encoding/xml"
+  //"net/http"
 	"os"
   "path/filepath"
   //"golang.org/x/net/html"
   "github.com/PuerkitoBio/goquery"
+  //"github.com/gocolly/colly/v2"
 )
 
 // document represents a Wikipedia abstract dump document.
@@ -66,25 +70,27 @@ func loadDocuments(path string) ([]document, error) {
   if err != nil {
     panic(err)
   }
+
+	dump := struct {
+		Documents []document
+	}{}
+
   for _, fn := range filenames {
-    fmt.Println(fn)
+    fp := path + '/' + fn
+    s, err := ioutil.ReadAll(fp)
+    p := strings.NewReader(s)
+    doc, _ := goquery.NewDocumentFromReader(p)
+    id, _ := strconv.Atoi(fn[0:5])
+    title = doc.Find("h3").First().Text()
+    text = doc.Text()
+    fmt.PrintLn(id,title)
   }
   
-	//dec := xml.NewDecoder(gz)
-	dump := struct {
-		Documents []document `xml:"doc"`
-	}{}
-	//if err := dec.Decode(&dump); err != nil {
-	//	return nil, err
-	//}
-	
   docs := dump.Documents
 	
   //for i := range docs {
 	//	docs[i].ID = i
 	//}
-
-  //z := html.NewTokenizer(gz)
 
 	return docs, nil
 }

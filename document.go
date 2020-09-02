@@ -1,19 +1,15 @@
 package main
 
 import (
+  "bufio"
   "fmt"
   "log"
   "strings"
   "strconv"
-  "io/ioutil"
-	//"compress/gzip"
-	//"encoding/xml"
-  //"net/http"
+  //"io/ioutil"
 	"os"
   "path/filepath"
-  //"golang.org/x/net/html"
   "github.com/PuerkitoBio/goquery"
-  //"github.com/gocolly/colly/v2"
 )
 
 // document represents a Wikipedia abstract dump document.
@@ -76,14 +72,26 @@ func loadDocuments(path string) ([]document, error) {
 	}{}
 
   for _, fn := range filenames {
-    fp := path + '/' + fn
-    s, err := ioutil.ReadAll(fp)
-    p := strings.NewReader(s)
-    doc, _ := goquery.NewDocumentFromReader(p)
+    fp := path + "/" + fn
+    //s, err := ioutil.ReadFile(fp)
+    //p := strings.NewReader(s)
+    
+    buf, err := os.Open(fp)
+    if err != nil {
+      log.Fatal(err)
+    }
+    defer func() {
+      if err = buf.Close(); err != nil {
+        log.Fatal(err)
+      }
+    }()
+
+    r := bufio.NewReader(buf)    
+    doc, _ := goquery.NewDocumentFromReader(r)
     id, _ := strconv.Atoi(fn[0:5])
-    title = doc.Find("h3").First().Text()
-    text = doc.Text()
-    fmt.PrintLn(id,title)
+    title := doc.Find("h3").First().Text()
+    text := doc.Text()
+    fmt.Println(id,title)
   }
   
   docs := dump.Documents

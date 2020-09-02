@@ -12,7 +12,7 @@ func main() {
 	flag.StringVar(&query, "q", "Small wild cat", "search query")
 	flag.Parse()
 
-	log.Println("Starting simplefts")
+	log.Println("Starting tbcfts")
 
 	start := time.Now()
 	docs, err := loadDocuments(dumpPath)

@@ -1,4 +1,4 @@
-module github.com/akrylysov/simplefts
+module github.com/jeremytammik/tbcfts
 
 go 1.14
 

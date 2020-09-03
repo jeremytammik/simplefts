@@ -12,7 +12,7 @@ func main() {
 	flag.StringVar(&query, "q", "pipe segment create", "search query")
 	flag.Parse()
 
-	log.Println("Starting tbcfts")
+	log.Println("Starting tbcfts, p=" + dumpPath + ", q=" + query)
 
 	start := time.Now()
 	docs, err := loadDocuments(dumpPath)

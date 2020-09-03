@@ -57,7 +57,7 @@ func loadDocuments(path string) ([]document, error) {
   }
   n := len(filenames)
   fmt.Println(n, "files")
-  docs := make([]document,n)
+  docs := make([]document,0,n)
   
   for _, fn := range filenames {
 
@@ -81,7 +81,7 @@ func loadDocuments(path string) ([]document, error) {
     f.Close()
   }
   for i := range docs {
-    fmt.Println(docs[i].ID,docs[i].Title)
+    fmt.Println(i, docs[i].ID, docs[i].Title)
 	}
 	return docs, nil
 }

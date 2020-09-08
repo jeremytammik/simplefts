@@ -195,7 +195,7 @@ func stopwordFilter(tokens []string) []string {
     "your": {},
     "yours": {},
     "yourself": {},
-    "yourselves  ": {}
+    "yourselves": {},
   }
 	r := make([]string, 0, len(tokens))
 	for _, token := range tokens {

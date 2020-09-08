@@ -4,6 +4,7 @@ import (
   "bufio"
   "fmt"
   "log"
+  //"sort"
   "strings"
   "strconv"
 	"os"
@@ -83,8 +84,11 @@ func loadDocuments(path string) ([]document, error) {
     docs = append(docs, document{title,doc.Text(),id-1})
     f.Close()
   }
-  for i := range docs {
+  for i := 0; i < 10; ++i {
     fmt.Println(i, docs[i].ID, docs[i].Title)
-	}
+  }  
+//  for i := range docs {
+  //  fmt.Println(i, docs[i].ID, docs[i].Title)
+	//}
 	return docs, nil
 }

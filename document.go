@@ -4,7 +4,7 @@ import (
   "bufio"
   "fmt"
   "log"
-  //"sort"
+  "regexp"
   "strings"
   "strconv"
 	"os"
@@ -50,7 +50,11 @@ func visit(filenames *[]string) filepath.WalkFunc {
   }
 }
 
-func scanLines(path string) ([]string, error) {
+func scanurls(path string) ([]string, error) {
+
+  //pattern := regexp.MustCompile("<tr><td align="right">\d{4}</td><td>\d{4}-\d{2}-\d{2}</td><td><a href="(http[^"]*)">([^\<]*)</a>&nbsp;&nbsp;&nbsp;<a href="([^"]*)">^</a>&nbsp;&nbsp;</td><td>[^\<]*</td></tr>")  
+
+  pattern := regexp.MustCompile("<tr><td align="right">\d{4}</td><td>\d{4}-\d{2}-\d{2}</td><td><a href="(http[^"]*)">[^\<]*</a>&nbsp;&nbsp;&nbsp;<a href="[^"]*">^</a>&nbsp;&nbsp;</td><td>[^\<]*</td></tr>")
  
   file, err := os.Open(path)
   if err != nil {
@@ -63,12 +67,15 @@ func scanLines(path string) ([]string, error) {
  
   scanner.Split(bufio.ScanLines) 
  
-  var lines []string
+  var urls []string
  
   for scanner.Scan() {
-    lines = append(lines, scanner.Text())
+    line := scanner.Text()
+    url := pattern.FindString(line)
+    if( 4 < len(url) {    
+      urls = append(urls, url)
   }
-  return lines, nil
+  return urls, nil
 }
 
 func loadDocuments(path string) ([]document, error) {
@@ -92,10 +99,12 @@ func loadDocuments(path string) ([]document, error) {
   for i, url := range urls {
     fmt.Println(i, url)
   }
-  
+
   // Retrieve blog post document content
   
   docs := make([]document,0,n)
+
+  return docs, nil
   
   for _, fn := range filenames {
 

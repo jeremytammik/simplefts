@@ -100,9 +100,14 @@ func loadDocuments(path string) ([]document, error) {
   if err != nil {
     panic(err)
   }
-  for i, url := range urls {
-    fmt.Println(i, url)
+  //for i, url := range urls {
+  //  fmt.Println(i, url)
+  //}
+  m := len(urls)
+  if( m != n ) {
+    log.Fatal("Expected equal number of blog post docs and urls", m, "!=", n)
   }
+  
 
   // Retrieve blog post document content
   

@@ -90,6 +90,7 @@ func loadDocuments(path string) ([]document, error) {
   for i := range docs {
     if( docs[i].ID != i ) {
       fmt.Println(i, docs[i].ID, docs[i].Title)
+      log.Fatal("Doc index out of sync with blog post number")
     }
 	}
 	return docs, nil

@@ -105,9 +105,8 @@ func loadDocuments(path string) ([]document, error) {
   //}
   m := len(urls)
   if( m != n ) {
-    log.Fatal("Expected equal number of blog post docs and urls", m, "!=", n)
+    log.Fatal("Expected equal number of blog post docs and urls, but ", n, " != ", m)
   }
-  
 
   // Retrieve blog post document content
   

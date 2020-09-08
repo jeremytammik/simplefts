@@ -54,7 +54,7 @@ func scanurls(path string) ([]string, error) {
 
   //pattern := regexp.MustCompile("<tr><td align="right">\d{4}</td><td>\d{4}-\d{2}-\d{2}</td><td><a href="(http[^"]*)">([^\<]*)</a>&nbsp;&nbsp;&nbsp;<a href="([^"]*)">^</a>&nbsp;&nbsp;</td><td>[^\<]*</td></tr>")  
 
-  pattern := regexp.MustCompile("<tr><td align=\"right\">\d{4}</td><td>\d{4}-\d{2}-\d{2}</td><td><a href=\"(http[^\"]*)\">[^\<]*</a>&nbsp;&nbsp;&nbsp;<a href=\"[^\"]*\">^</a>&nbsp;&nbsp;</td><td>[^\<]*</td></tr>")
+  pattern := regexp.MustCompile("<tr><td align=\"right\">\\d{4}</td><td>\\d{4}-\\d{2}-\\d{2}</td><td><a href=\"(http[^\"]*)\">[^\<]*</a>&nbsp;&nbsp;&nbsp;<a href=\"[^\"]*\">^</a>&nbsp;&nbsp;</td><td>[^\<]*</td></tr>")
  
   file, err := os.Open(path)
   if err != nil {

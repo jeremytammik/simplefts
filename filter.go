@@ -17,10 +17,12 @@ func lowercaseFilter(tokens []string) []string {
 
 // stopwordFilter returns a slice of tokens with stop words removed.
 func stopwordFilter(tokens []string) []string {
-	var stopwords = map[string]struct{}{
-		"a": {}, "and": {}, "be": {}, "have": {}, "i": {},
-		"in": {}, "of": {}, "that": {}, "the": {}, "to": {},
-	}
+  
+	//var stopwords = map[string]struct{}{
+	//	"a": {}, "and": {}, "be": {}, "have": {}, "i": {},
+	//	"in": {}, "of": {}, "that": {}, "the": {}, "to": {},
+	//}
+  
   // more stopwords from https://www.ranks.nl/stopwords
 	var stopwords2 = map[string]struct{}{
     "a": {},

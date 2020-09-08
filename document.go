@@ -53,8 +53,9 @@ func visit(filenames *[]string) filepath.WalkFunc {
 func scanurls(path string) ([]string, error) {
 
   //pattern := regexp.MustCompile("<tr><td align="right">\d{4}</td><td>\d{4}-\d{2}-\d{2}</td><td><a href="(http[^"]*)">([^\<]*)</a>&nbsp;&nbsp;&nbsp;<a href="([^"]*)">^</a>&nbsp;&nbsp;</td><td>[^\<]*</td></tr>")  
+  //pattern := regexp.MustCompile("<tr><td align=\"right\">\\d{4}</td><td>\\d{4}-\\d{2}-\\d{2}</td><td><a href=\"(http[^\"]*)\">[^<]*</a>&nbsp;&nbsp;&nbsp;<a href=\"[^\"]*\">^</a>&nbsp;&nbsp;</td><td>[^<]*</td></tr>")
 
-  pattern := regexp.MustCompile("<tr><td align=\"right\">\\d{4}</td><td>\\d{4}-\\d{2}-\\d{2}</td><td><a href=\"(http[^\"]*)\">[^<]*</a>&nbsp;&nbsp;&nbsp;<a href=\"[^\"]*\">^</a>&nbsp;&nbsp;</td><td>[^<]*</td></tr>")
+  pattern := regexp.MustCompile("<tr><td align=\"right\">\\d{4}</td><td>\\d{4}-\\d{2}-\\d{2}</td><td><a href=\"(http[^\"]*)\">[^<]*</a>")
  
   file, err := os.Open(path)
   if err != nil {
@@ -72,6 +73,7 @@ func scanurls(path string) ([]string, error) {
   for scanner.Scan() {
     line := scanner.Text()
     url := pattern.FindString(line)
+    fmt.Println(line, "-->", url)
     if( 4 < len(url) ) {
       urls = append(urls, url)
     }

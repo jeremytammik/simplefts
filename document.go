@@ -56,7 +56,7 @@ func scanurls(path string) ([]string, error) {
   //pattern := regexp.MustCompile("<tr><td align=\"right\">\\d{4}</td><td>\\d{4}-\\d{2}-\\d{2}</td><td><a href=\"(http[^\"]*)\">[^<]*</a>&nbsp;&nbsp;&nbsp;<a href=\"[^\"]*\">^</a>&nbsp;&nbsp;</td><td>[^<]*</td></tr>")
   //pattern := regexp.MustCompile("<tr><td align=\"right\">\\d{4}</td><td>\\d{4}-\\d{2}-\\d{2}</td><td><a href=\"(http[^\"]*)\">[^<]*</a>")
   
-  pattern := regexp.MustCompile("<tr><td .* href=\"(http[^\"]*thebuildingcoder.typepad.com[^\"]*)\"")  
+  pattern := regexp.MustCompile("<tr><td align=\"right\">(\\d{4}).* href=\"(http[^\"]*thebuildingcoder.typepad.com[^\"]*)\"")  
  
   file, err := os.Open(path)
   if err != nil {
@@ -74,9 +74,9 @@ func scanurls(path string) ([]string, error) {
   for scanner.Scan() {
     line := scanner.Text()
     matches := pattern.FindSubmatch([]byte(line))
-    fmt.Println(line, "-->", matches)
     if( 0 < len(matches) ) {
-      urls = append(urls, string(matches[1]))
+      fmt.Println(line, "-->", string(matches[1]))
+      urls = append(urls, string(matches[2]))
     }
   }
   return urls, nil

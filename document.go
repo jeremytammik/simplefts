@@ -70,12 +70,19 @@ func scanurls(path string) ([]string, error) {
   scanner.Split(bufio.ScanLines) 
  
   var urls []string
+  
+  j := 0
  
   for scanner.Scan() {
     line := scanner.Text()
     matches := pattern.FindSubmatch([]byte(line))
     if( 0 < len(matches) ) {
-      fmt.Println(line, "-->", string(matches[1]))
+      //fmt.Println(line, "-->", string(matches[1]))
+      id, _ := strconv.Atoi(string(matches[1]))
+      j++
+      if( j != id ) {
+        log.Fatal("Blog post URL number out of sync with index: ", id, " != ", j)
+      }
       urls = append(urls, string(matches[2]))
     }
   }

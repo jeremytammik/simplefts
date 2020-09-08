@@ -16,6 +16,7 @@ import (
 type document struct {
 	Title string
   Text  string
+  Url   string
 	ID    int
 }
 
@@ -119,8 +120,6 @@ func loadDocuments(path string) ([]document, error) {
   
   docs := make([]document,0,n)
 
-  return docs, nil
-  
   for _, fn := range filenames {
 
     fp := path + "/" + fn
@@ -142,7 +141,8 @@ func loadDocuments(path string) ([]document, error) {
       log.Fatal("Expected positive blog post number, not ", id)
     }
     title := doc.Find("h3").First().Text()
-    docs = append(docs, document{title,doc.Text(),id-1})
+    i := id - 1
+    docs = append(docs, document{ title, doc.Text(), urls[i], i })
     f.Close()
   }
   for i := range docs {

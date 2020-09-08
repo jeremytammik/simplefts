@@ -72,7 +72,7 @@ func scanurls(path string) ([]string, error) {
   for scanner.Scan() {
     line := scanner.Text()
     url := pattern.FindString(line)
-    if( 4 < len(url) {
+    if( 4 < len(url) ) {
       urls = append(urls, url)
     }
   }

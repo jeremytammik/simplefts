@@ -84,9 +84,6 @@ func loadDocuments(path string) ([]document, error) {
     docs = append(docs, document{title,doc.Text(),id-1})
     f.Close()
   }
-  //for i := 0; i < 10; i++ {
-  //  fmt.Println(i, docs[i].ID, docs[i].Title)
-  //}  
   for i := range docs {
     if( docs[i].ID != i ) {
       fmt.Println(i, docs[i].ID, docs[i].Title)

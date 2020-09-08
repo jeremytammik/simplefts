@@ -28,10 +28,10 @@ func main() {
 
 	start = time.Now()
 	matchedIDs := idx.search(query)
-	log.Printf("Search found %d documents in %v", len(matchedIDs), time.Since(start))
+	log.Printf("Search for '%s' found %d documents in %v", query, len(matchedIDs), time.Since(start))
 
 	for _, id := range matchedIDs {
 		doc := docs[id]
-		log.Printf("%d %s\n", id, doc.Title)
+		log.Printf("%d %s\n", id + 1, doc.Title)
 	}
 }

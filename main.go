@@ -32,6 +32,6 @@ func main() {
 
 	for _, id := range matchedIDs {
 		doc := docs[id]
-		log.Printf("%d %s\n", id + 1, doc.Title)
+		log.Printf( "%d [%s](%s)\n", id + 1, doc.Title, doc.Url )
 	}
 }

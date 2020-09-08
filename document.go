@@ -50,7 +50,31 @@ func visit(filenames *[]string) filepath.WalkFunc {
   }
 }
 
+func scanLines(path string) ([]string, error) {
+ 
+  file, err := os.Open(path)
+  if err != nil {
+    return nil, err
+  }
+ 
+  defer file.Close()
+ 
+  scanner := bufio.NewScanner(file)
+ 
+  scanner.Split(bufio.ScanLines) 
+ 
+  var lines []string
+ 
+  for scanner.Scan() {
+    lines = append(lines, scanner.Text())
+  }
+  return lines, nil
+}
+
 func loadDocuments(path string) ([]document, error) {
+  
+  // List the blog post source files
+  
   var filenames []string
   err := filepath.Walk(path, visit(&filenames))
   if err != nil {
@@ -58,6 +82,19 @@ func loadDocuments(path string) ([]document, error) {
   }
   n := len(filenames)
   fmt.Println(n, "files")
+  
+  // Load URLs from index.html
+  
+  urls, err := scanurls(path + "/index.html")
+  if err != nil {
+    panic(err)
+  }
+  for i, url := range urls {
+    fmt.Println(i, url)
+  }
+  
+  // Retrieve blog post document content
+  
   docs := make([]document,0,n)
   
   for _, fn := range filenames {

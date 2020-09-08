@@ -100,7 +100,7 @@ func loadDocuments(path string) ([]document, error) {
     panic(err)
   }
   n := len(filenames)
-  fmt.Println(n, "files")
+  //fmt.Println(n, "files")
   
   // Load URLs from index.html
   

@@ -76,8 +76,11 @@ func loadDocuments(path string) ([]document, error) {
     r := bufio.NewReader(f)    
     doc, _ := goquery.NewDocumentFromReader(r)
     id, _ := strconv.Atoi(fn[0:4])
+    if(!0<id){
+      log.Fatal('Expected positive blog post number, not ', id)
+    }
     title := doc.Find("h3").First().Text()
-    docs = append(docs, document{title,doc.Text(),id})
+    docs = append(docs, document{title,doc.Text(),id-1})
     f.Close()
   }
   for i := range docs {

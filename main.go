@@ -9,7 +9,7 @@ import (
 func main() {
 	var dumpPath, query string
 	flag.StringVar(&dumpPath, "p", "/a/doc/revit/tbc/git/a", "The Building Coder blog post source path")
-	flag.StringVar(&query, "q", "pipe segment create", "search query")
+	flag.StringVar(&query, "q", "pipe segment create conduit", "search query")
 	flag.Parse()
 
 	log.Println("Starting tbcfts, p=" + dumpPath + ", q=" + query)

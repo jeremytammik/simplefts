@@ -73,10 +73,10 @@ func scanurls(path string) ([]string, error) {
  
   for scanner.Scan() {
     line := scanner.Text()
-    url := pattern.FindSubmatch([]byte(line))
-    fmt.Println(line, "-->", url)
-    if( 4 < len(url) ) {
-      urls = append(urls, url)
+    matches := pattern.FindSubmatch([]byte(line))
+    fmt.Println(line, "-->", matches)
+    if( 0 < len(matches) ) {
+      urls = append(urls, string(matches[1]))
     }
   }
   return urls, nil

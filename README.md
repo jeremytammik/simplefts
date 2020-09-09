@@ -40,8 +40,8 @@ Another important enhancement would be to split the documents into smaller secti
 
 For instance, I could create much smaller and more targeted documents to index by using the `h4` tags that delimit individual sections of text within each blog post instead of retaining each blog post in its entirety as a single document.
 
-Published 2020-09-09 by The Building Coder in the article
-on [Optimising Parameters and Full-Text Search](https://thebuildingcoder.typepad.com/blog/2020/09/optimising-parameters-and-full-text-search.html).
+(The text above was published 2020-09-09 by The Building Coder in the article
+on [Optimising Parameters and Full-Text Search](https://thebuildingcoder.typepad.com/blog/2020/09/optimising-parameters-and-full-text-search.html).)
 
 ## Todo
 

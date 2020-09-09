@@ -47,3 +47,17 @@ on [Optimising Parameters and Full-Text Search](https://thebuildingcoder.typepad
 
 - Split documents into smaller sections based on `h4` tags instead of `h3`.
 - Cache the index between runs.
+
+## Author
+
+Jeremy Tammik,
+[The Building Coder](http://thebuildingcoder.typepad.com),
+[Autodesk](http://www.autodesk.com)
+[Forge Platform Development](http://forge.autodesk.com) and
+[ADN](http://www.autodesk.com/adn)
+[Open](http://www.autodesk.com/adnopen)
+
+## License
+
+This sample is licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Please see the [LICENSE](LICENSE) file for full details.
